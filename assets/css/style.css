@@ -1,0 +1,348 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Prevent font size inflation */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+  line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}
+
+:root {
+  --white: hsl(0, 0%, 100%);
+
+  --clr-bright-blue: hsl(220, 98%, 61%);
+  --clr-gradient: linear-gradient(
+    to right,
+    hsl(192, 100%, 67%),
+    hsl(280, 87%, 65%)
+  );
+
+  --very-light-gray: hsl(0, 0%, 98%);
+  --very-light-grayish-blue: hsl(236, 33%, 92%);
+  --light-grayish-blue: hsl(233, 11%, 84%);
+  --dark-grayish-blue: hsl(236, 9%, 61%);
+  --very-dark-grayish-blue: hsl(235, 19%, 35%);
+
+  --step--2: clamp(0.61rem, 0.6rem + 0.06vw, 0.64rem);
+  --step--1: clamp(0.73rem, 0.7rem + 0.12vw, 0.8rem);
+  --step-0: clamp(0.88rem, 0.83rem + 0.22vw, 1rem);
+  --step-1: clamp(1.05rem, 0.98rem + 0.35vw, 1.25rem);
+  --step-2: clamp(1.26rem, 1.15rem + 0.53vw, 1.56rem);
+  --step-3: clamp(1.51rem, 1.36rem + 0.77vw, 1.95rem);
+  --step-4: clamp(1.81rem, 1.6rem + 1.09vw, 2.44rem);
+  --step-5: clamp(2.18rem, 1.87rem + 1.52vw, 3.05rem);
+
+  --fs-xsmall: var(--step--2);
+  --fs-small: var(--step--1);
+  --fs-base: var(--step-0);
+  --fs-medium: var(--step-1);
+  --fs-large: var(--step-2);
+  --fs-xlarge: var(--step-3);
+  --fs-xxlarge: var(--step-4);
+  --fs-xxxlarge: var(--step-5);
+
+  --fw-base: 400;
+  --fw-bold: 700;
+
+  --font-family: "DM Sans", Inter, system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-base);
+  color: var(--very-dark-grayish-blue);
+  background-color: var(--very-light-gray);
+  background-image: url("../images/bg-desktop-light.jpg");
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: 100% 40%;
+}
+
+button,
+label {
+  cursor: pointer;
+}
+
+input {
+  border: none;
+  outline: none;
+}
+
+input,
+input::placeholder {
+  color: var(--very-dark-grayish-blue);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-bold);
+}
+
+.wrapper {
+  width: min(575px, 100% - 2rem);
+  margin-inline: auto;
+}
+
+header {
+  padding-block: 3rem;
+}
+
+h1 {
+  letter-spacing: 0.75rem;
+  font-size: var(--fs-xlarge);
+  font-weight: var(--fw-bold);
+  color: var(--white);
+}
+
+.todo-input-field {
+  position: relative;
+}
+
+.todo-input-field input {
+  width: 100%;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  padding-block: 1rem;
+  padding-left: 3.5rem;
+  background-color: var(--white);
+  box-shadow: -2px 0px 43px -12px var(--dark-grayish-blue);
+}
+
+.todo-input-field button {
+  position: absolute;
+  display: inline-block;
+  inset: 0;
+  margin: auto 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--dark-grayish-blue);
+  background: transparent;
+}
+
+.todos {
+  width: 100%;
+  border-radius: 0.5rem;
+  box-shadow: -2px 0px 43px -12px var(--dark-grayish-blue);
+}
+
+.todo-list {
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.todo-list > * + * {
+  border-top: 1px solid var(--light-grayish-blue);
+}
+
+.todo-list__item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-block: 1rem;
+  padding-left: 1rem;
+  background-color: var(--white);
+}
+
+.todo-list__item:first-child {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.todos > :last-child {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.todo-list input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.todo-list input[type="checkbox"]:checked ~ .todo-name {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.todo-list input[type="checkbox"]:checked ~ .todo-name {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.todo-checkbox {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--dark-grayish-blue);
+}
+
+.todo-list input[type="checkbox"]:checked ~ .todo-checkbox {
+  border: 0;
+  background: url("../images/icon-check.svg"), var(--clr-gradient);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.todo-name {
+  font-weight: var(--fw-bold);
+  margin-right: auto;
+}
+
+.remove-todo-btn {
+  padding-right: 1rem;
+  border: none;
+  background: transparent;
+}
+
+.remove-todo-btn img {
+  width: 70%;
+}
+
+.todos__status {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  border-top: 1px solid var(--light-grayish-blue);
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  background-color: var(--white);
+}
+
+.todos-filter {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: var(--white);
+  box-shadow: -2px 0px 43px -12px var(--dark-grayish-blue);
+}
+
+.todos-filter {
+  position: relative;
+}
+
+.todos-filter button {
+  font-weight: var(--fw-bold);
+  border: 0;
+  background: transparent;
+  color: var(--dark-grayish-blue);
+}
+
+.todos-filter p {
+  display: none;
+  position: absolute;
+}
+
+.todos-filter > *:hover {
+  color: var(--very-dark-grayish-blue);
+}
+
+.todos-filter .active-todos {
+  left: 1rem;
+}
+
+.todos-filter .clear-completed-todos {
+  right: 1rem;
+}
+
+.todos-filter button[aria-selected="true"] {
+  color: var(--clr-bright-blue);
+}
+
+@media (min-width: 50em) {
+  .todos__status {
+    display: none;
+  }
+
+  .todos-filter {
+    margin-top: 1rem;
+  }
+
+  .todos-filter p {
+    display: block;
+  }
+}

@@ -4,11 +4,67 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="./assets/images/favicon-32x32.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/style.css">
   <script src="./assets/js/main.js" defer></script>
   <title>Todo App</title>
 </head>
 <body>
-  
+  <header>
+    <div class="wrapper">
+      <h1>TODO</h1>
+    </div>
+  </header>
+  <main>
+    <div class="wrapper">
+      <form action="#" autocomplete="off">
+        <div class="todo-input-field">
+          <button type="button"></button>
+          <input type="text" name="todo-input" id="todo-input" placeholder="Create a new todo">
+        </div>
+        <div class="todos">
+          <ul class="todo-list">
+            <li class="todo-list__item">
+              <input type="checkbox" id="todo-id">
+              <label class="todo-checkbox" for="todo-id"></label>
+              <label for="todo-id" class="todo-name">Learn JavaScript for 30 mins</label>
+              <button class="remove-todo-btn">
+                <img src="./assets/images/icon-cross.svg" alt="">
+              </button>
+            </li>
+            <li class="todo-list__item">
+              <input type="checkbox" id="todo-id-2">
+              <label class="todo-checkbox" for="todo-id-2"></label>
+              <label for="todo-id-2" class="todo-name">Learn JavaScript for 30 mins</label>
+              <button class="remove-todo-btn">
+                <img src="./assets/images/icon-cross.svg" alt="">
+              </button>
+            </li>
+            <li class="todo-list__item">
+              <input type="checkbox" id="todo-id-3">
+              <label class="todo-checkbox" for="todo-id-3"></label>
+              <label for="todo-id-3" class="todo-name">Learn JavaScript for 30 mins</label>
+              <button class="remove-todo-btn">
+                <img src="./assets/images/icon-cross.svg" alt="">
+              </button>
+            </li>
+          </ul>
+          <div class="todos__status">
+            <p class="active-todos">3 Items Left</p>
+            <p class="clear-completed-todos">Clear Completed</p>
+          </div>
+        </div>
+        <div class="todos-filter">
+          <p class="active-todos">3 Items Left</p>
+          <button type="button" aria-selected="true">All</button>
+          <button type="button" aria-selected="false">Active</button>
+          <button type="button" aria-selected="false">Completed</button>
+          <p class="clear-completed-todos">Clear Completed</p>
+        </div>
+      </form>
+    </div>
+  </main>
 </body>
 </html>
