@@ -48,5 +48,18 @@ function removeTodo(event) {
   }
 }
 
+function toggleTodoCompletion(event) {
+  const todoCheckbox = event.target.closest('input[type="checkbox"]');
+  if (!todoCheckbox) return;
+  
+  const todo = todoCheckbox.parentElement;
+  if (todoCheckbox.checked) {
+    todo.dataset.completed = true;
+  } else {
+    todo.dataset.completed = false;
+  }
+}
+
 todoApp.addEventListener('submit', addTodo);
 todoList.addEventListener('click', removeTodo);
+todoList.addEventListener('click', toggleTodoCompletion);
