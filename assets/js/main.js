@@ -36,6 +36,8 @@ function addTodo(event) {
 
   const newTodo = createTodo(todoInputValue);
   todoList.appendChild(newTodo);
+
+  checkUI();
 }
 
 function removeTodo(event) {
@@ -46,6 +48,8 @@ function removeTodo(event) {
   if (confirm('Are you sure?')) {
     todo.remove();
   }
+
+  checkUI();
 }
 
 function toggleTodoCompletion(event) {
@@ -59,6 +63,19 @@ function toggleTodoCompletion(event) {
     todo.dataset.completed = false;
   }
 }
+
+function checkUI() {
+  const numberOfTodosEl = document.querySelectorAll('.active-todos');
+
+  const numberOfTodos = todoList.children.length;
+
+  numberOfTodosEl.forEach((element) => {
+    const elementTextContent = numberOfTodos > 1 ? `${numberOfTodos} Items Left` : `${numberOfTodos} Item Left`;
+    element.textContent = elementTextContent;
+  });
+}
+
+checkUI();
 
 todoApp.addEventListener('submit', addTodo);
 todoList.addEventListener('click', removeTodo);
