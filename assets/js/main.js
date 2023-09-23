@@ -9,6 +9,7 @@ function createTodo(todoName) {
   const todoId = generateUniqueString(10);
   const todo = document.createElement('li');
   todo.classList.add('todo-list__item');
+  todo.dataset.status = 'active';
   todo.innerHTML = DOMPurify.sanitize(`
     <input type="checkbox" id="${todoId}">
     <label class="todo-checkbox" for="${todoId}"></label>
@@ -58,9 +59,9 @@ function toggleTodoCompletion(event) {
   
   const todo = todoCheckbox.parentElement;
   if (todoCheckbox.checked) {
-    todo.dataset.completed = true;
+    todo.dataset.status = 'completed';
   } else {
-    todo.dataset.completed = false;
+    todo.dataset.status = 'active';
   }
 }
 
