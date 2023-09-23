@@ -326,11 +326,20 @@ h1 {
 }
 
 .todos-filter .clear-completed-todos {
+  font-weight: var(--fw-base);
+  display: none;
+  position: absolute;
   right: 1rem;
 }
 
 .todos-filter button[aria-selected="true"] {
   color: var(--clr-bright-blue);
+}
+
+.clear-completed-todos {
+  color: inherit;
+  border: 0;
+  background: transparent;
 }
 
 @media (min-width: 50em) {
@@ -343,6 +352,10 @@ h1 {
   }
 
   .todos-filter p {
+    display: block;
+  }
+
+  .todos-filter .clear-completed-todos {
     display: block;
   }
 }
