@@ -38,4 +38,15 @@ function addTodo(event) {
   todoList.appendChild(newTodo);
 }
 
+function removeTodo(event) {
+  const removeTodoBtn = event.target.closest('.remove-todo-btn');
+  if (!removeTodoBtn) return;
+  
+  const todo = removeTodoBtn.parentElement;
+  if (confirm('Are you sure?')) {
+    todo.remove();
+  }
+}
+
 todoApp.addEventListener('submit', addTodo);
+todoList.addEventListener('click', removeTodo);
