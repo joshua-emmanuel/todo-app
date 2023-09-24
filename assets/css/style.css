@@ -219,23 +219,8 @@ h1 {
 .empty-todo-message {
   text-align: center;
   padding: 1rem;
-  border-radius: .5rem;
-  background-color: var(--white);
-}
-
-.empty-active-todo-message {
-  display: none;
-  text-align: center;
-  padding: 1rem;
-  border-radius: .5rem;
-  background-color: var(--white);
-}
-
-.empty-completed-todo-message {
-  display: none;
-  text-align: center;
-  padding: 1rem;
-  border-radius: .5rem;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
   background-color: var(--white);
 }
 
@@ -251,11 +236,6 @@ h1 {
 .todo-list__item:first-child {
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
-}
-
-.todo-list__item:last-child {
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
 }
 
 .todos > :last-child {  
@@ -371,6 +351,15 @@ h1 {
 }
 
 @media (min-width: 50em) {
+  .empty-todo-message {
+    border-radius: .5rem;
+  }
+
+  .todo-list__item:last-child {
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+  }
+
   .todos__status {
     display: none;
   }
