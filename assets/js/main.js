@@ -92,6 +92,8 @@ function highlightCompletedTodoTabBtn() {
 
 function displayAllTodos(todos) {
   todos.forEach((todo) => todo.style.display = 'flex');
+
+  checkUI();
 }
 
 function displayActiveTodos(todos) {
@@ -99,6 +101,14 @@ function displayActiveTodos(todos) {
 
   const activeTodos = todos.filter((todo) => todo.getAttribute('data-status') === 'active');
   activeTodos.forEach((activeTodo) => activeTodo.style.display = 'flex');
+
+  const emptyTodoMessage = document.querySelector('.empty-todo-message');
+  if (activeTodos.length === 0) {
+    emptyTodoMessage.textContent = 'There are no active todos left';
+    emptyTodoMessage.style.display = 'block';
+  } else {
+    emptyTodoMessage.style.display = 'none';
+  }
 }
 
 function displayCompletedTodos(todos) {
@@ -106,6 +116,14 @@ function displayCompletedTodos(todos) {
 
   const completedTodos = todos.filter((todo) => todo.getAttribute('data-status') === 'completed');
   completedTodos.forEach((completedTodo) => completedTodo.style.display = 'flex');
+
+  const emptyTodoMessage = document.querySelector('.empty-todo-message');
+  if (completedTodos.length === 0) {
+    emptyTodoMessage.textContent = 'There are no completed todos left';
+    emptyTodoMessage.style.display = 'block';
+  } else {
+    emptyTodoMessage.style.display = 'none';
+  }
 }
 
 function filterTodos(event) {
@@ -135,6 +153,7 @@ function toggleEmptyTodoState(numberOfTodos) {
   const emptyTodoMessage = document.querySelector('.empty-todo-message');
 
   if (numberOfTodos === 0) {
+    emptyTodoMessage.textContent = 'Your todo list is empty. Hurray! 🎉';
     emptyTodoMessage.style.display = 'block';
   } else {
     emptyTodoMessage.style.display = 'none';

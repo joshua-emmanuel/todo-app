@@ -223,6 +223,22 @@ h1 {
   background-color: var(--white);
 }
 
+.empty-active-todo-message {
+  display: none;
+  text-align: center;
+  padding: 1rem;
+  border-radius: .5rem;
+  background-color: var(--white);
+}
+
+.empty-completed-todo-message {
+  display: none;
+  text-align: center;
+  padding: 1rem;
+  border-radius: .5rem;
+  background-color: var(--white);
+}
+
 .todo-list__item {
   display: flex;
   align-items: center;
