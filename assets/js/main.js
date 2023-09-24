@@ -1,5 +1,6 @@
 const todoApp = document.querySelector('#todo-app');
 const todoList = document.querySelector('.todo-list');
+const todoFilter = document.querySelector('.todos-filter');
 
 function generateUniqueString(length) {
   return Math.random().toString(36).substring(2, 2 + length);
@@ -65,6 +66,44 @@ function toggleTodoCompletion(event) {
   }
 }
 
+function displayAllTodos(todos) {
+  todos.forEach((todo) => todo.style.display = 'flex');
+}
+
+function displayActiveTodos(todos) {
+  todos.forEach((todo) => todo.style.display = 'none');
+
+  const activeTodos = todos.filter((todo) => todo.getAttribute('data-status') === 'active');
+  activeTodos.forEach((activeTodo) => activeTodo.style.display = 'flex');
+}
+
+function displayCompletedTodos(todos) {
+  todos.forEach((todo) => todo.style.display = 'none');
+
+  const completedTodos = todos.filter((todo) => todo.getAttribute('data-status') === 'completed');
+  completedTodos.forEach((completedTodo) => completedTodo.style.display = 'flex');
+}
+
+function filterTodos(event) {
+  const todos = [...document.querySelectorAll('.todo-list__item')];
+  if (event.target.closest('[data-toggle="all"]')) {
+    displayAllTodos(todos);
+  } else if (event.target.closest('[data-toggle="active"]')) {
+    displayActiveTodos(todos);
+  } else if (event.target.closest('[data-toggle="completed"]')) {
+    displayCompletedTodos(todos);
+  }
+}
+
+function clearCompletedTodos(event) {
+  if (!event.target.closest('.clear-completed-todos')) return;
+  const completedTodos = document.querySelectorAll('.todo-list__item[data-status="completed"]');
+  if (!completedTodos) return;
+
+  completedTodos.forEach((completedTodo) => completedTodo.remove());
+  checkUI();
+}
+
 function toggleEmptyTodoState(numberOfTodos) {
   const emptyTodoMessage = document.querySelector('.empty-todo-message');
 
@@ -97,3 +136,5 @@ checkUI();
 todoApp.addEventListener('submit', addTodo);
 todoList.addEventListener('click', removeTodo);
 todoList.addEventListener('click', toggleTodoCompletion);
+todoFilter.addEventListener('click', filterTodos);
+todoApp.addEventListener('click', clearCompletedTodos);

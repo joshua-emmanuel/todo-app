@@ -27,7 +27,7 @@
         </div>
         <div class="todos">
           <ul class="todo-list">
-            <!-- <li class="todo-list__item">
+            <!-- <li class="todo-list__item" data-status="active">
               <input type="checkbox" id="todo-id">
               <label class="todo-checkbox" for="todo-id"></label>
               <label for="todo-id" class="todo-name">Learn JavaScript for 30 mins</label>
@@ -44,9 +44,9 @@
         </div>
         <div class="todos-filter">
           <p class="active-todos">3 Items Left</p>
-          <button type="button" aria-selected="true">All</button>
-          <button type="button" aria-selected="false">Active</button>
-          <button type="button" aria-selected="false">Completed</button>
+          <button type="button" aria-selected="true" data-toggle="all">All</button>
+          <button type="button" aria-selected="false" data-toggle="active">Active</button>
+          <button type="button" aria-selected="false" data-toggle="completed">Completed</button>
           <button type="button" class="clear-completed-todos">Clear Completed</button>
         </div>
       </form>
