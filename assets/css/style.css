@@ -216,6 +216,13 @@ h1 {
   border-top: 1px solid var(--light-grayish-blue);
 }
 
+.empty-todo-message {
+  text-align: center;
+  padding: 1rem;
+  border-radius: .5rem;
+  background-color: var(--white);
+}
+
 .todo-list__item {
   display: flex;
   align-items: center;
@@ -230,7 +237,12 @@ h1 {
   border-top-right-radius: 0.5rem;
 }
 
-.todos > :last-child {
+.todo-list__item:last-child {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.todos > :last-child {  
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
 }

@@ -65,15 +65,31 @@ function toggleTodoCompletion(event) {
   }
 }
 
-function checkUI() {
-  const numberOfTodosEl = document.querySelectorAll('.active-todos');
+function toggleEmptyTodoState(numberOfTodos) {
+  const emptyTodoMessage = document.querySelector('.empty-todo-message');
 
-  const numberOfTodos = todoList.children.length;
+  if (numberOfTodos === 0) {
+    emptyTodoMessage.style.display = 'block';
+  } else {
+    emptyTodoMessage.style.display = 'none';
+  }
+}
+
+function displayNumberOfTodos(numberOfTodos) {
+  const numberOfTodosEl = document.querySelectorAll('.active-todos');
 
   numberOfTodosEl.forEach((element) => {
     const elementTextContent = numberOfTodos > 1 ? `${numberOfTodos} Items Left` : `${numberOfTodos} Item Left`;
     element.textContent = elementTextContent;
   });
+}
+
+function checkUI() {
+  const todos = document.querySelectorAll('.todo-list__item');
+  const numberOfTodos = todos.length;
+
+  toggleEmptyTodoState(numberOfTodos);
+  displayNumberOfTodos(numberOfTodos);
 }
 
 checkUI();
