@@ -66,6 +66,30 @@ function toggleTodoCompletion(event) {
   }
 }
 
+function highlightAllTodoTabBtn() {
+  const todoTabBtns = [...document.querySelectorAll('[data-toggle]')];
+  todoTabBtns.forEach((todoTabBtn) => todoTabBtn.setAttribute('aria-selected', false));
+  
+  const allTodoTabBtn = document.querySelector('[data-toggle="all"]');
+  allTodoTabBtn.setAttribute('aria-selected', true);
+}
+
+function highlightActiveTodoTabBtn() {
+  const todoTabBtns = [...document.querySelectorAll('[data-toggle]')];
+  todoTabBtns.forEach((todoTabBtn) => todoTabBtn.setAttribute('aria-selected', false));
+  
+  const activeTodoTabBtn = document.querySelector('[data-toggle="active"]');
+  activeTodoTabBtn.setAttribute('aria-selected', true);
+}
+
+function highlightCompletedTodoTabBtn() {
+  const todoTabBtns = [...document.querySelectorAll('[data-toggle]')];
+  todoTabBtns.forEach((todoTabBtn) => todoTabBtn.setAttribute('aria-selected', false));
+  
+  const completedTodoTabBtn = document.querySelector('[data-toggle="completed"]');
+  completedTodoTabBtn.setAttribute('aria-selected', true);
+}
+
 function displayAllTodos(todos) {
   todos.forEach((todo) => todo.style.display = 'flex');
 }
@@ -87,10 +111,13 @@ function displayCompletedTodos(todos) {
 function filterTodos(event) {
   const todos = [...document.querySelectorAll('.todo-list__item')];
   if (event.target.closest('[data-toggle="all"]')) {
+    highlightAllTodoTabBtn();
     displayAllTodos(todos);
   } else if (event.target.closest('[data-toggle="active"]')) {
+    highlightActiveTodoTabBtn();
     displayActiveTodos(todos);
   } else if (event.target.closest('[data-toggle="completed"]')) {
+    highlightCompletedTodoTabBtn();
     displayCompletedTodos(todos);
   }
 }
