@@ -199,10 +199,12 @@ function clearCompletedTodos(event) {
   const completedTodos = document.querySelectorAll('.todo-list__item[data-status="completed"]');
   if (!completedTodos) return;
 
-  completedTodos.forEach((completedTodo) => completedTodo.remove());
-  clearCompletedTodosFromTodosState(completedTodos);
-  updateTodosInLocalStorage();
-  checkUI();
+  if (confirm('Are you sure?')) {
+    completedTodos.forEach((completedTodo) => completedTodo.remove());
+    clearCompletedTodosFromTodosState(completedTodos);
+    updateTodosInLocalStorage();
+    checkUI();
+  }
 }
 
 function toggleEmptyTodoState(numberOfTodos) {
