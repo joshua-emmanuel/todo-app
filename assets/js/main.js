@@ -2,17 +2,19 @@ const todoApp = document.querySelector('#todo-app');
 const todoList = document.querySelector('.todo-list');
 const todoFilter = document.querySelector('.todos-filter');
 
+const todos = [];
+
 function generateUniqueString(length) {
   return Math.random().toString(36).substring(2, 2 + length);
 }
 
-function createTodo(todoName) {
-  const todoId = generateUniqueString(10);
+function createTodo(todoName, todoId, todoStatus) {
   const todo = document.createElement('li');
   todo.classList.add('todo-list__item');
-  todo.dataset.status = 'active';
+  todo.dataset.id = todoId;
+  todo.dataset.status = todoStatus;
   todo.innerHTML = DOMPurify.sanitize(`
-    <input type="checkbox" id="${todoId}">
+    <input type="checkbox" id="${todoId}" ${todoStatus === 'completed' && 'checked'}>
     <label class="todo-checkbox" for="${todoId}"></label>
     <label for="${todoId}" class="todo-name">${todoName}</label>
     <button type="button" class="remove-todo-btn">
@@ -21,6 +23,11 @@ function createTodo(todoName) {
   `);
 
   return todo;
+}
+
+function addTodoToDOM(todoName, todoId, todoStatus) {
+  const newTodo = createTodo(todoName, todoId, todoStatus);
+  todoList.appendChild(newTodo);
 }
 
 function addTodo(event) {
@@ -36,10 +43,21 @@ function addTodo(event) {
     return;
   }
 
-  const newTodo = createTodo(todoInputValue);
-  todoList.appendChild(newTodo);
+  const newTodo = {
+    name: todoInputValue,
+    id: generateUniqueString(10),
+    status: 'active',
+  }
+  todos.push(newTodo);
+
+  addTodoToDOM(newTodo.name, newTodo.id, newTodo.status);
 
   checkUI();
+}
+
+function removeTodoFromTodosState(todoId) {
+  const todoIndex = todos.findIndex((todo) => todo.id === todoId);
+  todos.splice(todoIndex, 1);
 }
 
 function removeTodo(event) {
@@ -47,22 +65,33 @@ function removeTodo(event) {
   if (!removeTodoBtn) return;
   
   const todo = removeTodoBtn.parentElement;
+  const todoId = todo.dataset.id;
   if (confirm('Are you sure?')) {
     todo.remove();
+    removeTodoFromTodosState(todoId);
   }
 
   checkUI();
 }
 
-function toggleTodoCompletion(event) {
+
+function changeTodoStatusInTodosState(todoId, todoStatus) {
+  const todoIndex = todos.findIndex((todo) => todo.id === todoId);
+  todos[todoIndex].status = todoStatus;
+}
+
+function changeTodoStatus(event) {
   const todoCheckbox = event.target.closest('input[type="checkbox"]');
   if (!todoCheckbox) return;
   
   const todo = todoCheckbox.parentElement;
+  const todoId = todo.dataset.id;
   if (todoCheckbox.checked) {
     todo.dataset.status = 'completed';
+    changeTodoStatusInTodosState(todoId, 'completed');
   } else {
     todo.dataset.status = 'active';
+    changeTodoStatusInTodosState(todoId, 'active');
   }
 }
 
@@ -181,6 +210,6 @@ checkUI();
 
 todoApp.addEventListener('submit', addTodo);
 todoList.addEventListener('click', removeTodo);
-todoList.addEventListener('click', toggleTodoCompletion);
+todoList.addEventListener('click', changeTodoStatus);
 todoFilter.addEventListener('click', filterTodos);
 todoApp.addEventListener('click', clearCompletedTodos);
