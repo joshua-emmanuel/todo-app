@@ -150,7 +150,7 @@ function displayActiveTodos(todos) {
 
   const emptyTodoMessage = document.querySelector('.empty-todo-message');
   if (activeTodos.length === 0) {
-    emptyTodoMessage.textContent = 'There are no active todos left';
+    emptyTodoMessage.textContent = 'There are no active todos';
     emptyTodoMessage.style.display = 'block';
   } else {
     emptyTodoMessage.style.display = 'none';
@@ -165,7 +165,7 @@ function displayCompletedTodos(todos) {
 
   const emptyTodoMessage = document.querySelector('.empty-todo-message');
   if (completedTodos.length === 0) {
-    emptyTodoMessage.textContent = 'There are no completed todos left';
+    emptyTodoMessage.textContent = 'There are no completed todos';
     emptyTodoMessage.style.display = 'block';
   } else {
     emptyTodoMessage.style.display = 'none';
