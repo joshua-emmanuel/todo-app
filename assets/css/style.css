@@ -168,7 +168,7 @@ body {
   background-image: url("../images/bg-mobile-light.jpg");
   background-repeat: no-repeat;
   background-position: top;
-  background-size: 100% 39vh;
+  background-size: 100% 25vh;
 }
 
 [data-theme="dark"] body {
@@ -178,6 +178,7 @@ body {
 @media (min-width: 50em) {
   body {
     background-image: url("../images/bg-desktop-light.jpg");
+    background-size: 100% 38vh;
   }
 
   [data-theme="dark"] body {
@@ -213,6 +214,26 @@ input::placeholder {
 
 header {
   padding-block: 3rem;
+}
+
+header .wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.theme-toggle {
+  background: transparent;
+  border: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-image: url("../images/icon-moon.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+[data-theme="dark"] .theme-toggle {
+  background-image: url("../images/icon-sun.svg");
 }
 
 h1 {
