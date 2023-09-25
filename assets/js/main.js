@@ -1,6 +1,8 @@
 const todoApp = document.querySelector('#todo-app');
 const todoList = document.querySelector('.todo-list');
 const todoFilter = document.querySelector('.todos-filter');
+const themeToggleBtn = document.querySelector('[data-theme-toggle]');
+const html = document.querySelector('html');
 
 const todos = JSON.parse(getItemsFromLocalStorage()) || [];
 
@@ -242,3 +244,40 @@ todoList.addEventListener('click', removeTodo);
 todoList.addEventListener('click', changeTodoStatus);
 todoFilter.addEventListener('click', filterTodos);
 todoApp.addEventListener('click', clearCompletedTodos);
+
+function getThemeSetting({ localStorageTheme, systemSettingLight }) {
+  if (localStorageTheme !== null) {
+    return localStorageTheme;
+  }
+
+  if (systemSettingLight.matches) {
+    return 'light';
+  }
+
+  return 'dark';
+}
+
+const localStorageTheme = localStorage.getItem('theme');
+const systemSettingLight = window.matchMedia('(prefers-color-scheme: light)');
+
+let currentThemeSetting = getThemeSetting({
+  localStorageTheme,
+  systemSettingLight,
+});
+html.setAttribute('data-theme', currentThemeSetting);
+
+function toggleTheme() {
+  const newTheme = currentThemeSetting === 'light' ? 'dark' : 'light';
+
+  const newAriaLabel = newTheme === 'light' ? 'Change to dark theme' : 'Change to light theme';
+
+  themeToggleBtn.setAttribute('aria-label', newAriaLabel);
+
+  html.setAttribute('data-theme', newTheme);
+
+  localStorage.setItem('theme', newTheme);
+
+  currentThemeSetting = newTheme;
+}
+
+themeToggleBtn.addEventListener('click', toggleTheme);
