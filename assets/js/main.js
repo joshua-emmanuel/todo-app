@@ -2,7 +2,21 @@ const todoApp = document.querySelector('#todo-app');
 const todoList = document.querySelector('.todo-list');
 const todoFilter = document.querySelector('.todos-filter');
 
-const todos = [];
+const todos = JSON.parse(getItemsFromLocalStorage()) || [];
+
+function getItemsFromLocalStorage() {
+  const itemsFromLocalStorage = localStorage.getItem('todos');
+  return itemsFromLocalStorage;
+}
+
+function updateTodosInLocalStorage() {
+  localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+function displayTodos() {
+  todos.forEach((todo) => addTodoToDOM(todo.name, todo.id, todo.status));
+  checkUI();
+}
 
 function generateUniqueString(length) {
   return Math.random().toString(36).substring(2, 2 + length);
@@ -49,6 +63,7 @@ function addTodo(event) {
     status: 'active',
   }
   todos.push(newTodo);
+  updateTodosInLocalStorage();
 
   addTodoToDOM(newTodo.name, newTodo.id, newTodo.status);
 
@@ -69,11 +84,11 @@ function removeTodo(event) {
   if (confirm('Are you sure?')) {
     todo.remove();
     removeTodoFromTodosState(todoId);
+    updateTodosInLocalStorage();
   }
 
   checkUI();
 }
-
 
 function changeTodoStatusInTodosState(todoId, todoStatus) {
   const todoIndex = todos.findIndex((todo) => todo.id === todoId);
@@ -89,9 +104,11 @@ function changeTodoStatus(event) {
   if (todoCheckbox.checked) {
     todo.dataset.status = 'completed';
     changeTodoStatusInTodosState(todoId, 'completed');
+    updateTodosInLocalStorage();
   } else {
     todo.dataset.status = 'active';
     changeTodoStatusInTodosState(todoId, 'active');
+    updateTodosInLocalStorage();
   }
 }
 
@@ -169,12 +186,22 @@ function filterTodos(event) {
   }
 }
 
+function clearCompletedTodosFromTodosState(completedTodos) {
+  completedTodos.forEach((completedTodo) => {
+    const completedTodoId = completedTodo.dataset.id;
+    const completedTodoIndex = todos.findIndex((todo) => todo.id === completedTodoId);
+    todos.splice(completedTodoIndex, 1);
+  });
+}
+
 function clearCompletedTodos(event) {
   if (!event.target.closest('.clear-completed-todos')) return;
   const completedTodos = document.querySelectorAll('.todo-list__item[data-status="completed"]');
   if (!completedTodos) return;
 
   completedTodos.forEach((completedTodo) => completedTodo.remove());
+  clearCompletedTodosFromTodosState(completedTodos);
+  updateTodosInLocalStorage();
   checkUI();
 }
 
@@ -206,7 +233,7 @@ function checkUI() {
   displayNumberOfTodos(numberOfTodos);
 }
 
-checkUI();
+displayTodos();
 
 todoApp.addEventListener('submit', addTodo);
 todoList.addEventListener('click', removeTodo);
